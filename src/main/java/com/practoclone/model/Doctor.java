@@ -1,6 +1,7 @@
 package com.practoclone.model;
 
 public class Doctor {
+	private long id;
     private String FullName;
     private String Email;
     private long Phoneno;
