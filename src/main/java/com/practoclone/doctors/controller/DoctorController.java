@@ -1,10 +1,11 @@
 package com.practoclone.doctors.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +24,11 @@ public class DoctorController {
 	 @PostMapping("/create")
 	 public ResponseEntity<String> create(@RequestBody Doctor doctor)
 	 {
-		 return ResponseEntity.status(HttpStatus.CREATED).body(doctorService.createDoctor(doctor)!=null?"doctor created !":"doctor creation failed");
+		 
+	 return Optional.ofNullable(doctorService.createDoctor(doctor))
+			 .map(doc->ResponseEntity.status(HttpStatus.CREATED).body(doc.getName()+ " Doctor Created !"))
+             .orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Unable To Create Doctor"))			 
+			;
 	 }
 	 
 	 @DeleteMapping("/{id}")

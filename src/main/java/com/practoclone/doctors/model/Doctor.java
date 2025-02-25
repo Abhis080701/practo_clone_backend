@@ -21,6 +21,9 @@ public class Doctor {
 	@Column(name = "email", unique = true)
 	private String email;
 
+	@Column(name ="specialization")
+	private String specialization;
+	
 	@Column(name = "qualification")
 	private String qualification;
 
@@ -40,14 +43,16 @@ public class Doctor {
 	private boolean isAvailable;
 
 	public Doctor() {
+		// TODO Auto-generated constructor stub
 	}
 
-	public Doctor(long id, String name, String email, String qualification, int experience, int age, long mobileNo,
-			String address, boolean isAvailable) {
+	public Doctor(long id, String name, String email, String specialization, String qualification, int experience,
+			int age, long mobileNo, String address, boolean isAvailable) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
+		this.specialization = specialization;
 		this.qualification = qualification;
 		this.experience = experience;
 		this.age = age;
@@ -60,11 +65,9 @@ public class Doctor {
 		return id;
 	}
 
-	
 	/*
 	 * public void setId(long id) { this.id = id; }
 	 */
-
 	public String getName() {
 		return name;
 	}
@@ -79,6 +82,14 @@ public class Doctor {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getSpecialization() {
+		return specialization;
+	}
+
+	public void setSpecialization(String specialization) {
+		this.specialization = specialization;
 	}
 
 	public String getQualification() {
@@ -128,5 +139,9 @@ public class Doctor {
 	public void setAvailable(boolean isAvailable) {
 		this.isAvailable = isAvailable;
 	}
+	
+	
+
+	
 
 }
