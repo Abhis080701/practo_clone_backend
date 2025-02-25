@@ -11,22 +11,20 @@ import com.practoclone.doctors.model.Doctor;
 import com.practoclone.doctors.service.DoctorService;
 
 @RestController
-@RequestMapping("/api/doctors")
+@RequestMapping("/api/v1")
 public class DoctorController {
-	 @Autowired
-	    private DoctorService doctorService;
- 
-	 @PostMapping("/create")
-	 public ResponseEntity<String> create(@RequestBody Doctor doctor)
-	 {
-		 
-	 return Optional.ofNullable(doctorService.createDoctor(doctor))
-			 .map(doc->ResponseEntity.status(HttpStatus.CREATED).body(doc.getName()+ " Doctor Created !"))
-             .orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Unable To Create Doctor"))			 
-			;
-	 }
+	@Autowired
+	private DoctorService doctorService;
 
-	@PutMapping("/update/{id}")
+	@PostMapping("/doctor/create")
+	public ResponseEntity<String> create(@RequestBody Doctor doctor) {
+
+		return Optional.ofNullable(doctorService.createDoctor(doctor))
+				.map(doc -> ResponseEntity.status(HttpStatus.CREATED).body(doc.getName() + " Doctor Created !"))
+				.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Unable To Create Doctor"));
+	}
+
+	@PutMapping("/doctor/{id}")
 	public ResponseEntity<String> updateDoctor(@PathVariable Long id, @RequestBody Doctor updatedDoctor) {
 		try {
 			Doctor updatedDoc = doctorService.updateDoctor(id, updatedDoctor);
@@ -35,14 +33,12 @@ public class DoctorController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
 	}
-	 
-	 @DeleteMapping("/{id}")
-	    public ResponseEntity<String> deleteDoctor(@PathVariable Long id) {
-	        return doctorService.findDoctorById(id)
-	                .map(doctor -> {
-	                    doctorService.deleteDoctorById(id);
-	                    return ResponseEntity.ok("Doctor deleted successfully.");
-	                })
-	                .orElse(ResponseEntity.notFound().build());
-	    }
+
+	@DeleteMapping("/doctor/{id}")
+	public ResponseEntity<String> deleteDoctor(@PathVariable Long id) {
+		return doctorService.findDoctorById(id).map(doctor -> {
+			doctorService.deleteDoctorById(id);
+			return ResponseEntity.ok("Doctor deleted successfully.");
+		}).orElse(ResponseEntity.notFound().build());
+	}
 }
