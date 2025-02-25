@@ -1,4 +1,4 @@
-package com.practoclone.model;
+package com.practoclone.doctors.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,11 +12,12 @@ import jakarta.persistence.Table;
 public class Doctor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private long id;
 	@Column(name = "name")
 	private String name;
 
-	@Column(name = "email")
+	@Column(name = "email", unique = true)
 	private String email;
 
 	@Column(name = "qualification")
@@ -58,9 +59,10 @@ public class Doctor {
 		return id;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
+	
+	/*
+	 * public void setId(long id) { this.id = id; }
+	 */
 
 	public String getName() {
 		return name;

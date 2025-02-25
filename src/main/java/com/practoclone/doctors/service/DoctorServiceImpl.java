@@ -1,4 +1,4 @@
-package com.practoclone.service;
+package com.practoclone.doctors.service;
 
 public interface DoctorServiceImpl {
 
