@@ -1,5 +1,5 @@
 package com.practoclone.doctors.service;
 
-public interface DoctorServiceImpl {
+public class DoctorServiceImpl implements DoctorService {
 
 }
