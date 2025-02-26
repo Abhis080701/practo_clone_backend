@@ -1,4 +1,4 @@
-package com.practoclone.doctors.model;
+package com.practoclone.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

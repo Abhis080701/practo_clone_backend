@@ -1,9 +1,9 @@
-package com.practoclone.doctors.service;
+package com.practoclone.service;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.practoclone.doctors.model.Doctor;
+import com.practoclone.model.Doctor;
 
 public interface DoctorService {
 	Doctor createDoctor(Doctor doctor); // create Doctor

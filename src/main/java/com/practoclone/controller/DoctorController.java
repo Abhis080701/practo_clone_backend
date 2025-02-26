@@ -1,4 +1,4 @@
-package com.practoclone.doctors.controller;
+package com.practoclone.controller;
 
 import java.util.Optional;
 
@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.practoclone.doctors.model.Doctor;
-import com.practoclone.doctors.service.DoctorService;
+
+import com.practoclone.model.Doctor;
+import com.practoclone.service.DoctorService;
+
 import java.util.List;
 
 @RestController
