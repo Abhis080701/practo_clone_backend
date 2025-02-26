@@ -1,5 +1,6 @@
 package com.practoclone.doctors.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,10 @@ public class DoctorServiceImpl implements DoctorService {
 
 	@Override
 	public Doctor createDoctor(Doctor doctor) {
+		
 		return doctorRepository.save(doctor);
 	}
+	
 	
 	public Optional<Doctor> findDoctorById(Long id) {
         return doctorRepository.findById(id);
@@ -43,6 +46,22 @@ public class DoctorServiceImpl implements DoctorService {
 					return doctorRepository.save(existingDoctor);  // Save updated doctor
 				})
 				.orElseThrow(() -> new RuntimeException("Doctor with ID " + id + " not found."));
+	}
+
+
+
+	@Override
+	public List<Doctor> getAllDoctors( ) {
+		
+		return doctorRepository.findAll();
+	}
+
+
+	@Override
+	public Doctor getDoctorById(Long id) {
+		// TODO Auto-generated method stub
+		 return doctorRepository.findById(id)
+	                .orElseThrow(() -> new IllegalArgumentException("Doctor with ID " + id + " not found"));
 	}
 }
 
