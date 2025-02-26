@@ -58,7 +58,7 @@ public class DoctorController {
 	public ResponseEntity<String> deleteDoctor(@PathVariable Long id) {
 		return doctorService.findDoctorById(id).map(doctor -> {
 			doctorService.deleteDoctorById(id);
-			return ResponseEntity.ok("Doctor deleted successfully.");
-		}).orElse(ResponseEntity.notFound().build());
+			return ResponseEntity.status(HttpStatus.FOUND).body("Doctor deleted successfully.");
+		}).orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not Available "));
 	}
 }
