@@ -39,15 +39,15 @@ public class Doctor {
 	@Column(name = "address")
 	private String address;
 
-	@Column(name = "is_available")
-	private boolean isAvailable;
+	@Column(name = "available")
+	private boolean available;
 
 	public Doctor() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Doctor(long id, String name, String email, String specialization, String qualification, int experience,
-			int age, long mobileNo, String address, boolean isAvailable) {
+			int age, long mobileNo, String address, boolean available) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -58,7 +58,7 @@ public class Doctor {
 		this.age = age;
 		this.mobileNo = mobileNo;
 		this.address = address;
-		this.isAvailable = isAvailable;
+		this.available = available;
 	}
 
 	public long getId() {
@@ -133,12 +133,15 @@ public class Doctor {
 	}
 
 	public boolean isAvailable() {
-		return isAvailable;
+		return available;
 	}
 
-	public void setAvailable(boolean isAvailable) {
-		this.isAvailable = isAvailable;
+	public void setAvailable(boolean available) {
+		this.available = available;
 	}
+
+	
+
 	
 	
 
