@@ -54,12 +54,6 @@ public class DoctorController {
 		}
 	}
 	
-	
-	@DeleteMapping("/delete")
-     public String getReq()
-     {
-		return "Working";
-     }
 
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> deleteDoctor(@PathVariable Long id) {
