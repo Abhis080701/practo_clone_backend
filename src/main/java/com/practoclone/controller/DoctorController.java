@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.practoclone.model.Doctor;
 import com.practoclone.service.DoctorService;
+import com.practoclone.util.FileUtil;
 
 import java.util.List;
 
@@ -37,9 +39,15 @@ public class DoctorController {
 	}
 
 	@PostMapping("/create")
-	public ResponseEntity<String> create(@RequestBody Doctor doctor) {
-
-		return Optional.ofNullable(doctorService.createDoctor(doctor))
+	public ResponseEntity<String> create(@RequestBody Doctor doctor) throws Exception {
+		 MultipartFile imageFile = null;
+		 
+		 if(doctor.getImagePath()!=null)
+		 {
+			  imageFile = FileUtil.convertPathToMultipart(doctor.getImagePath());
+		 }
+		
+		return Optional.ofNullable(doctorService.createDoctor(doctor,imageFile))
 				.map(doc -> ResponseEntity.status(HttpStatus.CREATED).body(doc.getName() + " Doctor Created !"))
 				.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Unable To Create Doctor"));
 	}

@@ -17,6 +17,9 @@ public class Doctor {
 	
 	@Column(name = "name")
 	private String name;
+	
+	@Column(name="image_path")
+	private String imagePath; 
 
 	@Column(name = "email", unique = true)
 	private String email;
@@ -46,11 +49,12 @@ public class Doctor {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Doctor(long id, String name, String email, String specialization, String qualification, int experience,
-			int age, long mobileNo, String address, boolean available) {
+	public Doctor(long id, String name, String imagePath, String email, String specialization, String qualification,
+			int experience, int age, long mobileNo, String address, boolean available) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.imagePath = imagePath;
 		this.email = email;
 		this.specialization = specialization;
 		this.qualification = qualification;
@@ -65,15 +69,24 @@ public class Doctor {
 		return id;
 	}
 
-	/*
-	 * public void setId(long id) { this.id = id; }
-	 */
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 
 	public String getEmail() {
@@ -139,11 +152,6 @@ public class Doctor {
 	public void setAvailable(boolean available) {
 		this.available = available;
 	}
-
-	
-
-	
-	
 
 	
 

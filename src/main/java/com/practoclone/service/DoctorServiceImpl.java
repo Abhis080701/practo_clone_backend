@@ -1,10 +1,15 @@
 package com.practoclone.service;
 
+import java.io.File;
+import java.io.IOError;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.practoclone.model.Doctor;
 import com.practoclone.repository.DoctorRepository;
@@ -13,13 +18,25 @@ import com.practoclone.repository.DoctorRepository;
 public class DoctorServiceImpl implements DoctorService {
 	 @Autowired
 	    private DoctorRepository doctorRepository;
+	 
+	 private static final String IMAGE_DIRECTORY =  "src/main/resources/static/images/";
 
 	@Override
-	public Doctor createDoctor(Doctor doctor) {
-		
+	public Doctor createDoctor(Doctor doctor,MultipartFile imageFile) throws Exception {
+		   if (!imageFile.isEmpty()) {
+	            // Generate unique file name
+	            String fileName = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
+	            String filePath = IMAGE_DIRECTORY + fileName;
+
+	            // Save file to folder
+	            File file = new File(filePath);
+	            imageFile.transferTo(file);
+
+	            // Store relative path in DB
+	            doctor.setImagePath("images/" + fileName);
+	        }
 		return doctorRepository.save(doctor);
 	}
-	
 	
 	public Optional<Doctor> findDoctorById(Long id) {
         return doctorRepository.findById(id);
